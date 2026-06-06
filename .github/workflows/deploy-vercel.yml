@@ -1,0 +1,43 @@
+name: Deploy to Vercel
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Install Vercel CLI
+        run: npm install -g vercel@latest
+
+      - name: Deploy to Vercel (Production)
+        # Vercel Action：用 vercel deploy --prod --token=$VERCEL_TOKEN --yes
+        # 需要在 repo Settings → Secrets 添加 VERCEL_TOKEN
+        # 详见 https://vercel.com/docs/rest-api#authentication
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        run: |
+          vercel deploy --prod --token="$VERCEL_TOKEN" --yes
+
+      - name: Deploy to Vercel (Preview) —  仅 PR
+        if: github.event_name == 'pull_request'
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        run: |
+          vercel deploy --token="$VERCEL_TOKEN" --yes

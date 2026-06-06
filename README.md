@@ -2,7 +2,15 @@
 
 > 可视化剧情游戏设计器 —— 像画思维导图一样做文字冒险
 
-一个基于 React + ReactFlow 的剧情节点图编辑器，支持试玩、撤销/重做、单文件 HTML 导出、AI 辅助生成。
+[![GitHub](https://img.shields.io/badge/GitHub-sky--yangf%2Fstory--editor-blue?logo=github)](https://github.com/sky-yangf/story-editor)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Node](https://img.shields.io/badge/Node-%E2%89%A520-339933?logo=node.js)](https://nodejs.org)
+
+<p align="center">
+  <img src="src/assets/hero.png" alt="Story Editor 截图" width="280" />
+</p>
+
+一个基于 **React + ReactFlow** 的剧情节点图编辑器，支持试玩、撤销/重做、单文件 HTML 导出、AI 辅助生成。
 
 ---
 
@@ -44,11 +52,50 @@ npx serve dist
 
 ## 📦 部署
 
-本项目是**纯前端 SPA**——`dist/` 整个目录扔到任何静态托管即可：
+本项目是**纯前端 SPA**——`dist/` 整个目录扔到任何静态托管即可。
 
-- **Vercel** / **Netlify** / **Cloudflare Pages** —— 零配置
-- **自己的服务器** —— Nginx 配置 SPA fallback（`try_files $uri /index.html`）
-- **Docker** —— 见下方"用 Docker 部署"
+### 一键部署（推荐）
+
+| 平台 | 怎么做 |
+|---|---|
+| **Vercel** | 仓库 → [vercel.com/new](https://vercel.com/new) → 选 `sky-yangf/story-editor` → Deploy |
+| **Netlify** | 仓库 → [app.netlify.com/start](https://app.netlify.com/start) → 选仓库 → Deploy |
+| **Cloudflare Pages** | Pages → Connect to Git → 选仓库 → Build: `npm run build` · Output: `dist` |
+
+**三选一，零配置。** push 到 main 自动重新部署。
+
+### GitHub Actions 自动部署
+
+仓库自带 **2 个 workflow**：
+
+- **`.github/workflows/ci.yml`** —— PR 检查（type check + build），确保合入的代码可编译
+- **`.github/workflows/deploy-vercel.yml`** —— push main → 自动部署到 Vercel Production
+
+**启用 Vercel 部署需要一步**：
+1. 去 [vercel.com/account/tokens](https://vercel.com/account/tokens) 创建 token
+2. 仓库 Settings → Secrets and variables → Actions → New repository secret
+3. Name: `VERCEL_TOKEN` · Value: 粘贴你的 token
+4. 之后 push 任何 commit 都自动部署
+
+### Docker 部署
+
+```bash
+docker build -t story-editor .
+docker run -d -p 8080:80 story-editor
+# → http://localhost:8080
+```
+
+### Nginx 静态托管
+
+```nginx
+server {
+  listen 80;
+  server_name your-domain.com;
+  root /var/www/story-editor/dist;
+  index index.html;
+  location / { try_files $uri $uri/ /index.html; }
+}
+```
 
 ---
 
@@ -124,6 +171,18 @@ docker run -d -p 8080:80 story-editor
 | 框选 | 画布空白处按住左键拖 |
 | 多选 | Shift+点 / 拖框选 |
 | 删选中 | Backspace / Delete / 顶栏按钮 |
+
+---
+
+## 🔒 关于 API key
+
+**用户的 API key 永远只在用户自己的浏览器 localStorage 里**——**不会上传到任何服务器**（包括 Vercel/Netlify 部署的实例）。
+
+- ✅ 仓库源代码**没有**任何硬编码的 API key（已用 `sk-` / `sk-or-` / `sk-proj-` 正则扫描过）
+- ✅ Vercel/Netlify 服务器**不接触**用户的 key（纯静态托管，没有后端）
+- ✅ 用户换浏览器/换电脑 → 重新填一次 key（设计如此）
+
+**如要进一步隔离**（团队/SaaS 场景），可以加 BFF 后端代理 LLM API，但**本项目目前不需要**。
 
 ---
 
