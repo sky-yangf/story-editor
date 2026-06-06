@@ -2,12 +2,13 @@
 
 > 可视化剧情游戏设计器 —— 像画思维导图一样做文字冒险
 
-[![GitHub](https://img.shields.io/badge/GitHub-sky--yangf%2Fstory--editor-blue?logo=github)](https://github.com/sky-yangf/story-editor)
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![Node](https://img.shields.io/badge/Node-%E2%89%A520-339933?logo=node.js)](https://nodejs.org)
-
 <p align="center">
-  <img src="src/assets/hero.png" alt="Story Editor 截图" width="280" />
+  <a href="https://sky-yangf.github.io/story-editor/" target="_blank">
+    <img src="https://img.shields.io/badge/▶_试玩_Demo-FF6B6B?style=for-the-badge&logo=vercel&logoColor=white" alt="试玩 Demo" />
+  </a>
+  <a href="https://github.com/sky-yangf/story-editor" target="_blank">
+    <img src="https://img.shields.io/badge/📦_源码-GitHub-181717?style=for-the-badge&logo=github&logoColor=white" alt="源码" />
+  </a>
 </p>
 
 一个基于 **React + ReactFlow** 的剧情节点图编辑器，支持试玩、撤销/重做、单文件 HTML 导出、AI 辅助生成。
