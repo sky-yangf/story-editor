@@ -1,0 +1,52 @@
+:root {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --rf-handle: transparent;
+}
+
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* ========== 加大 React Flow 节点连接点（Handle）========== */
+.react-flow__handle {
+  width: 14px !important;
+  height: 14px !important;
+  border: 2px solid #fff !important;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15) !important;
+  transition: transform 0.15s ease, box-shadow 0.15s ease !important;
+  cursor: crosshair !important;
+}
+
+.react-flow__handle:hover {
+  transform: scale(1.4) !important;
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.25), 0 0 0 5px rgba(99, 102, 241, 0.25) !important;
+}
+
+/* 连接点源（source/output）默认微微发光 */
+.react-flow__handle-right {
+  right: -8px !important;
+}
+
+.react-flow__handle-bottom {
+  bottom: -8px !important;
+}
+
+.react-flow__handle-top {
+  top: -8px !important;
+}
+
+/* 节点本身加 hover 反馈 */
+.react-flow__node {
+  transition: filter 0.15s ease;
+}
+
+.react-flow__node:hover {
+  filter: brightness(1.02);
+}
