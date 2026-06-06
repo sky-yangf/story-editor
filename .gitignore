@@ -36,3 +36,12 @@ coverage/
 
 # ===== Hermes 临时文件（如果从 hermes-agent 跑过来的）=====
 .hermes-tmp/
+
+# ===== 截图/草图（不属于代码仓库）=====
+c-pic/
+
+# ===== 临时 HTML 测试文件 =====
+*.test.html
+d*.html
+e*.html
+test_out.html
