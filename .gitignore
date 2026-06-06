@@ -1,0 +1,38 @@
+# ===== 依赖 =====
+node_modules/
+.pnpm-store/
+
+# ===== 构建产物 =====
+dist/
+build/
+out/
+
+# ===== 临时 / 缓存 =====
+*.tmp
+*.tsbuildinfo
+.DS_Store
+Thumbs.db
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ===== 编辑器 =====
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ===== 环境变量 =====
+.env
+.env.local
+.env.*.local
+
+# ===== 测试 =====
+coverage/
+.nyc_output/
+
+# ===== Hermes 临时文件（如果从 hermes-agent 跑过来的）=====
+.hermes-tmp/
