@@ -45,3 +45,9 @@ c-pic/
 d*.html
 e*.html
 test_out.html
+
+# ===== 内部开发文档（不公开）=====
+# 详情见 docs/DEVELOPMENT.md —— 项目内部技术债 / 优化方向 / 测试 checklist
+# 写在这里是为了跟项目走 + 永不误 push
+docs/
+
